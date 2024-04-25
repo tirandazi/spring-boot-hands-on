@@ -70,15 +70,15 @@ public class UserController {
         UserRest userDetails = users.get(userId);
         userDetails.setFirstName(updateDetails.getFirstName());
         userDetails.setLastName(updateDetails.getLastName());
-        
+
         users.put(userId, userDetails);
 
         return userDetails;
     }
 
-    @DeleteMapping
-    public String deleteUser() {
-        String deleteResponse = "Delete User Called";
-        return deleteResponse;
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable("id") String id) {
+        users.remove(id);
+        return ResponseEntity.noContent().build();
     }
 }
