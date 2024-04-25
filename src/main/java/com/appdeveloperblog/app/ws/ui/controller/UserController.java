@@ -1,6 +1,8 @@
 package com.appdeveloperblog.app.ws.ui.controller;
 
+import com.appdeveloperblog.app.ws.ui.model.request.UserDetailsRequestModel;
 import com.appdeveloperblog.app.ws.ui.model.response.UserRest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,10 +29,19 @@ public class UserController {
         return new ResponseEntity<UserRest>(userDetails, HttpStatus.OK);
     }
 
-    @PostMapping
-    public String createUser() {
-        String createResponse = "Create User Called";
-        return createResponse;
+    @PostMapping(consumes = {
+            MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE
+    }, produces = {
+            MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE
+    })
+    public ResponseEntity<UserRest> createUser(@Valid @RequestBody UserDetailsRequestModel userDetails) {
+
+        UserRest returnValue = new UserRest();
+        returnValue.setFirstName(userDetails.getFirstName());
+        returnValue.setLastName(userDetails.getLastName());
+        returnValue.setEmail(userDetails.getEmail());
+
+        return new ResponseEntity<UserRest>(returnValue, HttpStatus.OK);
     }
 
     @PutMapping

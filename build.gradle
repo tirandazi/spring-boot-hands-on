@@ -18,7 +18,10 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.15.4'
+//	implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '3.2.5'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 }
 
 tasks.named('test') {
